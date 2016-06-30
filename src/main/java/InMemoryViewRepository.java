@@ -20,6 +20,15 @@ public class InMemoryViewRepository implements ViewRepository {
 
     @Override
     public View findBy(String isbn) {
-        return new View();
+        View view = views.stream()
+                .filter(v -> isbn.equals(v.getIsbn()))
+                .findFirst()
+                .orElse(new View());
+        return view;
+    }
+
+    @Override
+    public void save(View view) {
+        views.add(view);
     }
 }
