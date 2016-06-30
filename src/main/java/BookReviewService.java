@@ -1,4 +1,5 @@
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
 import com.spotify.apollo.Environment;
 import com.spotify.apollo.RequestContext;
 import com.spotify.apollo.Response;
@@ -17,22 +18,24 @@ import static okio.ByteString.encodeUtf8;
 public class BookReviewService {
 
     static final Logger LOG = LoggerFactory.getLogger(BookReviewService.class);
+    private static final ViewRepository repository = InMemoryViewRepository.getInstance();
 
     public static void main(String[] args) throws LoadingException {
-
         HttpService.boot(BookReviewService::init, "book-review", args);
     }
 
     static void init(Environment environment) {
         environment.routingEngine()
-                .registerAutoRoute(Route.sync("GET", "/books/<id>/", BookReviewService::review))
+                .registerAutoRoute(Route.sync("GET", "/books/<isbn>/", BookReviewService::review))
                 .registerAutoRoute(Route.sync("GET", "/ping", context -> "pong"));
     }
 
     private static Response<ByteString> review(RequestContext context)  {
         LOG.info("Received request to retrieve review");
-        String id = context.request().parameter("id").orElse("");
-        String body = "{}";
+        String isbn = context.request().parameter("isbn").orElse("");
+        CommandGetViews command = new CommandGetViews(repository, isbn);
+        View view = command.run();
+        String body = new Gson().toJson(view);
         LOG.info("Review: {}", body);
         return Response.forStatus(OK).withHeaders(headers()).withPayload(encodeUtf8(body));
     }
