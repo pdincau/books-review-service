@@ -17,8 +17,14 @@ public class CommandGetViews extends HystrixCommand<View> {
     }
 
     @Override
-    protected View run() throws Exception {
+    protected View run() {
         LOG.info("Invoking command to retrieve view");
         return repository.findBy(isbn);
+    }
+
+    @Override
+    protected View getFallback() {
+        LOG.info("Using fallback while applying command to retrieve view");
+        return new View();
     }
 }
