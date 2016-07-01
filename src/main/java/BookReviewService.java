@@ -21,12 +21,16 @@ public class BookReviewService {
     private static final ViewRepository repository = InMemoryViewRepository.getInstance();
 
     public static void main(String[] args) throws LoadingException {
+        View view = new View();
+        view.setAverageStars(1.5);
+        view.setIsbn("anyIsbn");
+        repository.save(view);
         HttpService.boot(BookReviewService::init, "book-review", args);
     }
 
     static void init(Environment environment) {
         environment.routingEngine()
-                .registerAutoRoute(Route.sync("GET", "/books/<isbn>/", BookReviewService::review))
+                .registerAutoRoute(Route.sync("GET", "/books", BookReviewService::review))
                 .registerAutoRoute(Route.sync("GET", "/ping", context -> "pong"));
     }
 
