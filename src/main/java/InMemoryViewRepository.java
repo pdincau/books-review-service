@@ -1,7 +1,12 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryViewRepository implements ViewRepository {
+
+    static final Logger LOG = LoggerFactory.getLogger(InMemoryViewRepository.class);
 
     private static InMemoryViewRepository instance = null;
 
@@ -20,6 +25,8 @@ public class InMemoryViewRepository implements ViewRepository {
 
     @Override
     public View findBy(String isbn) {
+        LOG.info("Recovering view with isbn: {}", isbn);
+
         View view = views.stream()
                 .filter(v -> isbn.equals(v.getIsbn()))
                 .findFirst()
@@ -29,6 +36,7 @@ public class InMemoryViewRepository implements ViewRepository {
 
     @Override
     public void save(View view) {
+        LOG.info("Saving view: {}", view);
         views.add(view);
     }
 }
