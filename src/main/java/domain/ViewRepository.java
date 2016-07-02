@@ -1,3 +1,5 @@
+package domain;
+
 public interface ViewRepository {
 
     View findBy(String isbn);
