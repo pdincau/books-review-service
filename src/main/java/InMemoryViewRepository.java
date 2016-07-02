@@ -12,7 +12,7 @@ public class InMemoryViewRepository implements ViewRepository {
 
     private List<View> views;
 
-    public static ViewRepository getInstance() {
+    public static InMemoryViewRepository getInstance() {
         if (instance == null) {
             return new InMemoryViewRepository();
         }
