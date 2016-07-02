@@ -24,7 +24,7 @@ public class BookReviewService {
         View view = new View();
         view.setAverageStars(1.5);
         view.setIsbn("anyIsbn");
-        repository.save(view);
+        repository.updateOrCreate(view);
         HttpService.boot(BookReviewService::init, "book-review", args);
     }
 

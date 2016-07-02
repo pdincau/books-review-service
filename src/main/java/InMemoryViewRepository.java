@@ -35,7 +35,7 @@ public class InMemoryViewRepository implements ViewRepository {
     }
 
     @Override
-    public void save(View view) {
+    public void updateOrCreate(View view) {
         LOG.info("Saving view: {}", view);
         views.add(view);
     }
