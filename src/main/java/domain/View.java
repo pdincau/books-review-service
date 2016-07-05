@@ -12,10 +12,12 @@ public class View {
     private Integer threeStars;
     private Integer fourStars;
     private Integer fiveStars;
+    private Integer votes;
 
     public View() {
-        this.zeroStars = 0;
+        this.votes = 0;
         this.averageStars = 0.0;
+        this.zeroStars = 0;
         this.oneStars = 0;
         this.twoStars = 0;
         this.threeStars = 0;
@@ -29,30 +31,6 @@ public class View {
 
     public void setAverageStars(Double averageStars) {
         this.averageStars = averageStars;
-    }
-
-    public void setZeroStars(Integer zeroStars) {
-        this.zeroStars = zeroStars;
-    }
-
-    public void setOneStars(Integer oneStars) {
-        this.oneStars = oneStars;
-    }
-
-    public void setTwoStars(Integer twoStars) {
-        this.twoStars = twoStars;
-    }
-
-    public void setThreeStars(Integer threeStars) {
-        this.threeStars = threeStars;
-    }
-
-    public void setFourStars(Integer fourStars) {
-        this.fourStars = fourStars;
-    }
-
-    public void setFiveStars(Integer fiveStars) {
-        this.fiveStars = fiveStars;
     }
 
     public String getIsbn() {
