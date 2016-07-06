@@ -7,9 +7,11 @@ import com.spotify.apollo.httpservice.HttpService;
 import com.spotify.apollo.httpservice.LoadingException;
 import com.spotify.apollo.route.Route;
 import domain.CommandGetViews;
+import domain.EventHandler;
 import domain.View;
 import domain.ViewRepository;
 import infrastructure.InMemoryViewRepository;
+import infrastructure.queue.RabbitMQEventHandler;
 import okio.ByteString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,8 @@ public class BookReviewService {
         view.setAverageStars(1.5);
         view.setIsbn("anyIsbn");
         repository.updateOrCreate(view);
+        EventHandler eventHandler = new RabbitMQEventHandler(repository);
+        eventHandler.listen();
         HttpService.boot(BookReviewService::init, "book-review", args);
     }
 
