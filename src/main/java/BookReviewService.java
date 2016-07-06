@@ -30,7 +30,7 @@ public class BookReviewService {
         View view = new View();
         view.setAverageStars(1.5);
         view.setIsbn("anyIsbn");
-        repository.updateOrCreate(view);
+        repository.insert(view);
         EventHandler eventHandler = new RabbitMQEventHandler(repository);
         eventHandler.listen();
         HttpService.boot(BookReviewService::init, "book-review", args);

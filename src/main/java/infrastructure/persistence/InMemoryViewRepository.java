@@ -30,7 +30,6 @@ public class InMemoryViewRepository implements ViewRepository {
     @Override
     public View findBy(String isbn) {
         LOG.info("Recovering view with isbn: {}", isbn);
-
         View view = views.stream()
                 .filter(v -> isbn.equals(v.getIsbn()))
                 .findFirst()
@@ -39,8 +38,15 @@ public class InMemoryViewRepository implements ViewRepository {
     }
 
     @Override
-    public void updateOrCreate(View view) {
-        LOG.info("Saving view: {}", view);
+    public void insert(View view) {
+        LOG.info("Inserting view: {}", view);
+        views.add(view);
+    }
+
+    @Override
+    public void update(View view) {
+        LOG.info("Updating view: {}", view);
+        views.removeIf(v -> v.getIsbn().equals(view.getIsbn()));
         views.add(view);
     }
 }

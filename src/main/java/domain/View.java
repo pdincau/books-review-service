@@ -2,6 +2,8 @@ package domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.Map;
+
 public class View {
 
     private String isbn;
@@ -40,5 +42,12 @@ public class View {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    public void updateWith(Map values) {
+        isbn = (String) values.get("id");
+        Double stars = (Double) values.get("rate");
+        averageStars = (averageStars * votes + stars) / (votes + 1);
+        votes += 1;
     }
 }
