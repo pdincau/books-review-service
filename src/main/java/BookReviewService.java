@@ -10,7 +10,7 @@ import domain.CommandGetViews;
 import domain.EventHandler;
 import domain.View;
 import domain.ViewRepository;
-import infrastructure.InMemoryViewRepository;
+import infrastructure.persistence.InMemoryViewRepository;
 import infrastructure.queue.RabbitMQEventHandler;
 import okio.ByteString;
 import org.slf4j.Logger;

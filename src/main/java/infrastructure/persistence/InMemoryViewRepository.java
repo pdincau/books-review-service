@@ -1,4 +1,4 @@
-package infrastructure;
+package infrastructure.persistence;
 
 import domain.View;
 import domain.ViewRepository;
