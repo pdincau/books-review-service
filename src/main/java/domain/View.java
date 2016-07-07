@@ -45,9 +45,15 @@ public class View {
     }
 
     public void updateWith(Map values) {
-        isbn = (String) values.get("id");
-        Double stars = (Double) values.get("rate");
-        averageStars = (averageStars * votes + stars) / (votes + 1);
+        String isbn = (String) values.get("id");
+        setIsbn(isbn);
+        Double newAverageStars = computeNewAverage(values);
+        setAverageStars(newAverageStars);
         votes += 1;
+    }
+
+    private Double computeNewAverage(Map values) {
+        Double stars = (Double) values.get("rate");
+        return (averageStars * votes + stars) / (votes + 1);
     }
 }
