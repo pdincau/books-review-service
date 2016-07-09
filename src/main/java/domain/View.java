@@ -37,22 +37,21 @@ public class View {
 
     public void updateWith(Map values) {
         String isbn = (String) values.get("id");
-        Double newAverageStars = computeNewAverage(values);
         setIsbn(isbn);
         Double star = (Double) values.get("rate");
-        updateCounterForStar(star.intValue());
+        Double newAverageStars = computeNewAverage(star);
+        updateCounters(star.intValue());
         setAverageStars(newAverageStars);
         votes += 1;
     }
 
-    private void updateCounterForStar(Integer star) {
+    private void updateCounters(Integer star) {
         Integer previousNumber = stars.get(star);
         stars.put(star, previousNumber + 1);
     }
 
-    private Double computeNewAverage(Map values) {
-        Double stars = (Double) values.get("rate");
-        return (averageStars * votes + stars) / (votes + 1);
+    private Double computeNewAverage(Double value) {
+        return (averageStars * votes + value) / (votes + 1);
     }
 
     private Map<Integer, Integer> emptyStarsMap() {
