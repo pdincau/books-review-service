@@ -2,29 +2,20 @@ package domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class View {
 
     private String isbn;
-    private Integer zeroStars;
     private Double averageStars;
-    private Integer oneStars;
-    private Integer twoStars;
-    private Integer threeStars;
-    private Integer fourStars;
-    private Integer fiveStars;
     private Integer votes;
+    private Map<Integer, Integer> stars;
 
     public View() {
         this.votes = 0;
         this.averageStars = 0.0;
-        this.zeroStars = 0;
-        this.oneStars = 0;
-        this.twoStars = 0;
-        this.threeStars = 0;
-        this.fourStars = 0;
-        this.fiveStars = 0;
+        this.stars = emptyStarsMap();
     }
 
     public void setIsbn(String isbn) {
@@ -46,14 +37,32 @@ public class View {
 
     public void updateWith(Map values) {
         String isbn = (String) values.get("id");
-        setIsbn(isbn);
         Double newAverageStars = computeNewAverage(values);
+        setIsbn(isbn);
+        Double star = (Double) values.get("rate");
+        updateCounterForStar(star.intValue());
         setAverageStars(newAverageStars);
         votes += 1;
+    }
+
+    private void updateCounterForStar(Integer star) {
+        Integer previousNumber = stars.get(star);
+        stars.put(star, previousNumber + 1);
     }
 
     private Double computeNewAverage(Map values) {
         Double stars = (Double) values.get("rate");
         return (averageStars * votes + stars) / (votes + 1);
+    }
+
+    private Map<Integer, Integer> emptyStarsMap() {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 0);
+        map.put(1, 0);
+        map.put(2, 0);
+        map.put(3, 0);
+        map.put(4, 0);
+        map.put(5, 0);
+        return map;
     }
 }
