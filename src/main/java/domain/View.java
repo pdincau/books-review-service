@@ -46,7 +46,7 @@ public class View {
 
     private void updateCounters(Integer star) {
         Integer previousNumber = stars.get(star);
-        stars.put(star, previousNumber + 1);
+        stars.replace(star, previousNumber + 1);
         votes += 1;
     }
 
