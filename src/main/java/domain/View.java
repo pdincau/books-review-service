@@ -39,7 +39,7 @@ public class View {
         String isbn = (String) values.get("id");
         setIsbn(isbn);
         Double star = (Double) values.get("rate");
-        Double newAverageStars = computeNewAverage(star);
+        Double newAverageStars = AverageCalculator.roundedAverage(star, averageStars, votes);
         setAverageStars(newAverageStars);
         updateCounters(star.intValue());
     }
@@ -48,10 +48,6 @@ public class View {
         Integer previousNumber = stars.get(star);
         stars.replace(star, previousNumber + 1);
         votes += 1;
-    }
-
-    private Double computeNewAverage(Double value) {
-        return (averageStars * votes + value) / (votes + 1);
     }
 
     private Map<Integer, Integer> emptyStarsMap() {
