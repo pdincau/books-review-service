@@ -40,14 +40,14 @@ public class View {
         setIsbn(isbn);
         Double star = (Double) values.get("rate");
         Double newAverageStars = computeNewAverage(star);
-        updateCounters(star.intValue());
         setAverageStars(newAverageStars);
-        votes += 1;
+        updateCounters(star.intValue());
     }
 
     private void updateCounters(Integer star) {
         Integer previousNumber = stars.get(star);
         stars.put(star, previousNumber + 1);
+        votes += 1;
     }
 
     private Double computeNewAverage(Double value) {
