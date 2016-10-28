@@ -8,6 +8,6 @@ public class AverageCalculator {
     }
 
     private static Double roundToClosestHalf(Double value) {
-        return Double.valueOf(Math.round(value * 2) / 2.0f);
+        return Math.round(value * 2) / 2.0;
     }
 }
