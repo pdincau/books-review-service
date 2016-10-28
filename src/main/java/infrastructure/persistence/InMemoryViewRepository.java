@@ -10,8 +10,7 @@ import java.util.List;
 
 public class InMemoryViewRepository implements ViewRepository {
 
-    static final Logger LOG = LoggerFactory.getLogger(InMemoryViewRepository.class);
-
+    private static final Logger LOG = LoggerFactory.getLogger(InMemoryViewRepository.class);
     private static InMemoryViewRepository instance = null;
 
     private List<View> views;
@@ -30,11 +29,10 @@ public class InMemoryViewRepository implements ViewRepository {
     @Override
     public View findBy(String isbn) {
         LOG.info("Recovering view with isbn: {}", isbn);
-        View view = views.stream()
+        return views.stream()
                 .filter(v -> isbn.equals(v.getIsbn()))
                 .findFirst()
                 .orElse(new View());
-        return view;
     }
 
     @Override
