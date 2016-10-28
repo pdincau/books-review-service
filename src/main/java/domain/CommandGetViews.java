@@ -10,7 +10,7 @@ public class CommandGetViews extends HystrixCommand<View> {
     private final ViewRepository repository;
     private final String isbn;
 
-    static final Logger LOG = LoggerFactory.getLogger(CommandGetViews.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CommandGetViews.class);
 
     public CommandGetViews(ViewRepository repository, String isbn) {
         super(HystrixCommandGroupKey.Factory.asKey("BookReviewGroup"));

@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class BookRatedEventConsumer extends DefaultConsumer {
 
-    static final Logger LOG = LoggerFactory.getLogger(BookRatedEventConsumer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BookRatedEventConsumer.class);
     private final ViewRepository repository;
 
     public BookRatedEventConsumer(Channel channel, ViewRepository repository) {

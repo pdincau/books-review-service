@@ -18,11 +18,11 @@ public class View {
         this.stars = emptyStarsMap();
     }
 
-    public void setIsbn(String isbn) {
+    private void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public void setAverageStars(Double averageStars) {
+    private void setAverageStars(Double averageStars) {
         this.averageStars = averageStars;
     }
 

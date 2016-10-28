@@ -23,7 +23,7 @@ import static okio.ByteString.encodeUtf8;
 
 public class BookReviewService {
 
-    static final Logger LOG = LoggerFactory.getLogger(BookReviewService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BookReviewService.class);
     private static final ViewRepository repository = InMemoryViewRepository.getInstance();
 
     public static void main(String[] args) throws LoadingException {
@@ -32,7 +32,7 @@ public class BookReviewService {
         HttpService.boot(BookReviewService::init, "book-review", args);
     }
 
-    static void init(Environment environment) {
+    private static void init(Environment environment) {
         environment.routingEngine()
                 .registerAutoRoute(Route.sync("GET", "/books", BookReviewService::review))
                 .registerAutoRoute(Route.sync("GET", "/ping", context -> "pong"));
